@@ -6,6 +6,7 @@
   --surface: #ffffff;
   --teal: #0f766e;
   --teal-dark: #0b4f4a;
+  --cream: #f0e6d3;
   --coral: #f26d5b;
   --gold: #f5b942;
   --blue: #3a6ea5;
@@ -55,13 +56,39 @@ a {
 }
 
 .brand-mark {
-  display: grid;
+  /* Logoet er et mini-søjlediagram: 80% realkredit, 15% banklån og 5% opsparing. */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
   width: 38px;
   height: 38px;
-  place-items: center;
-  color: white;
-  background: var(--teal-dark);
+  padding: 6px;
+  background: #e8ebe8;
   border-radius: 8px;
+}
+
+.logo-bar {
+  display: block;
+  width: 7px;
+  min-height: 2px;
+  border-radius: 2px 2px 0 0;
+}
+
+.logo-realkredit {
+  height: 80%;
+  background: var(--ink);
+}
+
+.logo-bank {
+  height: 15%;
+  background: var(--teal);
+}
+
+.logo-opsparing {
+  height: 5%;
+  background: var(--cream);
+  border: 1px solid rgba(20, 33, 43, 0.18);
 }
 
 .nav-links {
