@@ -27,30 +27,3 @@ document.getElementById('ud').style.height='5%';
 
 if(slider){beregn();}
 
-// Floating Action Button (FAB) toggle
-document.addEventListener('DOMContentLoaded', ()=>{
-	const fabToggle = document.getElementById('fabToggle');
-	const fabContainer = document.getElementById('fabContainer');
-	const fabMenu = document.getElementById('fabMenu');
-	if(!fabToggle || !fabContainer || !fabMenu) return;
-
-	fabToggle.addEventListener('click', (e)=>{
-		e.stopPropagation();
-		const open = fabContainer.classList.toggle('open');
-		fabMenu.setAttribute('aria-hidden', (!open).toString());
-	});
-
-	document.addEventListener('click', (e)=>{
-		if(!fabContainer.contains(e.target)){
-			fabContainer.classList.remove('open');
-			fabMenu.setAttribute('aria-hidden','true');
-		}
-	});
-
-	document.addEventListener('keydown', (e)=>{
-		if(e.key === 'Escape'){
-			fabContainer.classList.remove('open');
-			fabMenu.setAttribute('aria-hidden','true');
-		}
-	});
-});
