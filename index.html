@@ -1,25 +1,126 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HusFinans</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HusFinans - boligbudget for unge</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav>
-<h2>HusFinans</h2>
-<div>
-<a href="index.html">Forside</a>
-<a href="beregner.html">Beregn</a>
-<a href="gdpr.html">GDPR</a>
-</div>
-</nav>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="HusFinans forside">
+      <span class="brand-mark">HF</span>
+      <span>HusFinans</span>
+    </a>
+    <nav class="nav-links" aria-label="Primær navigation">
+      <a href="index.html">Overblik</a>
+      <a href="beregner.html">Beregner</a>
+      <a href="gdpr.html">GDPR</a>
+    </nav>
+  </header>
 
-<section class="hero">
-<h1>Beregn finansiering af boligkøb</h1>
-<p>Få hurtigt overblik over realkreditlån, banklån og udbetaling.</p>
-<a class="btn" href="beregner.html">Start beregning</a>
-</section>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Første bolig uden økonomisprog</p>
+        <h1>Se hvad et boligkøb kræver, før du går i banken.</h1>
+        <p class="hero-text">HusFinans viser prisen delt op i realkreditlån, banklån og udbetaling, så unge hurtigt kan forstå finansieringen bag et boligkøb.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#beregn">Prøv beregneren</a>
+          <a class="btn ghost" href="#guide">Se guiden</a>
+        </div>
+      </div>
+
+      <section class="quick-calculator" id="beregn" aria-labelledby="quick-title">
+        <div class="panel-header">
+          <p class="eyebrow">Live beregner</p>
+          <h2 id="quick-title">Boligpris</h2>
+        </div>
+
+        <label class="range-label" for="priceSlider">
+          <span>Vælg pris</span>
+          <strong id="priceValue">2.500.000 kr.</strong>
+        </label>
+        <input type="range" id="priceSlider" min="500000" max="10000000" step="50000" value="2500000">
+
+        <div class="result-grid" aria-live="polite">
+          <article class="result-card">
+            <span>Realkredit</span>
+            <strong id="mortgageValue">2.000.000 kr.</strong>
+            <small>80% af prisen</small>
+          </article>
+          <article class="result-card">
+            <span>Banklån</span>
+            <strong id="bankLoanValue">375.000 kr.</strong>
+            <small>15% af prisen</small>
+          </article>
+          <article class="result-card accent">
+            <span>Udbetaling</span>
+            <strong id="downPaymentValue">125.000 kr.</strong>
+            <small>5% du selv skal have</small>
+          </article>
+        </div>
+
+        <div class="finance-bars" aria-hidden="true">
+          <span class="bar mortgage" style="--size: 80%"></span>
+          <span class="bar bank" style="--size: 15%"></span>
+          <span class="bar down" style="--size: 5%"></span>
+        </div>
+      </section>
+    </section>
+
+    <section class="section split" id="guide">
+      <div>
+        <p class="eyebrow">Kort forklaret</p>
+        <h2>Hvad betyder 80 / 15 / 5?</h2>
+        <p>Ved et typisk boligkøb kan op til 80% finansieres med realkreditlån, 15% med banklån, og mindst 5% skal normalt betales som udbetaling.</p>
+      </div>
+      <div class="info-list">
+        <article>
+          <strong>1. Realkreditlån</strong>
+          <p>Den største del af lånet. Det er typisk billigere end banklån, fordi lånet har sikkerhed i boligen.</p>
+        </article>
+        <article>
+          <strong>2. Banklån</strong>
+          <p>Dækker ofte den del, der ligger mellem realkreditlånet og udbetalingen.</p>
+        </article>
+        <article>
+          <strong>3. Udbetaling</strong>
+          <p>Det beløb du selv skal spare op. Beregneren viser det tydeligt, fordi det er mest konkret for unge købere.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section youth-section">
+      <div>
+        <p class="eyebrow">Tjek før fremvisning</p>
+        <h2>Unge boligkøbere bør også huske</h2>
+      </div>
+      <div class="check-grid">
+        <article>
+          <span>01</span>
+          <h3>Faste udgifter</h3>
+          <p>El, varme, internet, forsikring, transport og mad skal stadig kunne betales efter lånet.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Engangsudgifter</h3>
+          <p>Flytning, møbler, advokat, tinglysning og istandsættelse kan hurtigt fylde i budgettet.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Persondata</h3>
+          <p>Siden gemmer ikke dine tal. Alt beregnes direkte i browseren og sendes ikke videre.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>HusFinans - informatikprojekt 2026</p>
+    <a href="gdpr.html">Læs om GDPR</a>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

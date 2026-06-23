@@ -1,28 +1,47 @@
+const slider = document.getElementById("priceSlider");
 
-const slider = document.getElementById('slider');
-const sliderValue = document.getElementById('sliderValue');
-
-if(slider){
-slider.addEventListener('input',()=>{
-sliderValue.textContent =
-Number(slider.value).toLocaleString('da-DK') + ' kr';
+const currency = new Intl.NumberFormat("da-DK", {
+  style: "currency",
+  currency: "DKK",
+  maximumFractionDigits: 0
 });
+
+function formatKr(value) {
+  return currency.format(value).replace("DKK", "kr.");
 }
 
-function beregn(){
-const pris = Number(slider.value);
-
-const rk = pris*0.80;
-const bl = pris*0.15;
-const ud = pris*0.05;
-
-document.getElementById('realkredit').innerText='Realkreditlån: '+rk.toLocaleString('da-DK')+' kr';
-document.getElementById('banklaan').innerText='Banklån: '+bl.toLocaleString('da-DK')+' kr';
-document.getElementById('udbetaling').innerText='Udbetaling: '+ud.toLocaleString('da-DK')+' kr';
-
-document.getElementById('rk').style.height='80%';
-document.getElementById('bl').style.height='15%';
-document.getElementById('ud').style.height='5%';
+function monthlyPayment(principal, yearlyRate, years) {
+  const months = years * 12;
+  const monthlyRate = yearlyRate / 12;
+  return principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
 }
 
-if(slider){beregn();}
+function setText(id, value) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.textContent = value;
+  }
+}
+
+function updateCalculator() {
+  if (!slider) {
+    return;
+  }
+
+  const price = Number(slider.value);
+  const mortgage = price * 0.8;
+  const bankLoan = price * 0.15;
+  const downPayment = price * 0.05;
+  const monthlyEstimate = monthlyPayment(mortgage, 0.04, 30) + monthlyPayment(bankLoan, 0.07, 10);
+
+  setText("priceValue", formatKr(price));
+  setText("mortgageValue", formatKr(mortgage));
+  setText("bankLoanValue", formatKr(bankLoan));
+  setText("downPaymentValue", formatKr(downPayment));
+  setText("monthlyValue", formatKr(Math.round(monthlyEstimate / 100) * 100));
+}
+
+if (slider) {
+  slider.addEventListener("input", updateCalculator);
+  updateCalculator();
+}

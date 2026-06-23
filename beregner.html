@@ -1,43 +1,79 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beregner</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beregner - HusFinans</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav>
-<h2>HusFinans</h2>
-<div>
-<a href="index.html">Forside</a>
-<a href="beregner.html">Beregn</a>
-<a href="gdpr.html">GDPR</a>
-</div>
-</nav>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="HusFinans forside">
+      <span class="brand-mark">HF</span>
+      <span>HusFinans</span>
+    </a>
+    <nav class="nav-links" aria-label="Primær navigation">
+      <a href="index.html">Overblik</a>
+      <a href="beregner.html">Beregner</a>
+      <a href="gdpr.html">GDPR</a>
+    </nav>
+  </header>
 
-<div class="container">
-<h1>Huslånsberegner</h1>
+  <main class="page-shell">
+    <section class="page-hero">
+      <p class="eyebrow">Interaktiv beregner</p>
+      <h1>Beregn finansieringen af en bolig.</h1>
+      <p>Flyt slideren og se med det samme, hvor meget der typisk bliver realkreditlån, banklån og udbetaling.</p>
+    </section>
 
-<label>Huspris</label>
-<input type="range" id="slider" min="500000" max="10000000" step="50000" value="2500000">
-<p id="sliderValue">2.500.000 kr</p>
+    <section class="calculator-layout">
+      <div class="calculator-panel">
+        <label class="range-label" for="priceSlider">
+          <span>Boligpris</span>
+          <strong id="priceValue">2.500.000 kr.</strong>
+        </label>
+        <input type="range" id="priceSlider" min="500000" max="10000000" step="50000" value="2500000">
 
-<button onclick="beregn()">Beregn</button>
+        <div class="result-grid expanded" aria-live="polite">
+          <article class="result-card">
+            <span>Realkreditlån</span>
+            <strong id="mortgageValue">2.000.000 kr.</strong>
+            <small>80% af boligprisen</small>
+          </article>
+          <article class="result-card">
+            <span>Banklån</span>
+            <strong id="bankLoanValue">375.000 kr.</strong>
+            <small>15% af boligprisen</small>
+          </article>
+          <article class="result-card accent">
+            <span>Udbetaling</span>
+            <strong id="downPaymentValue">125.000 kr.</strong>
+            <small>5% af boligprisen</small>
+          </article>
+        </div>
 
-<div class="card">
-<p id="realkredit"></p>
-<p id="banklaan"></p>
-<p id="udbetaling"></p>
-</div>
+        <div class="monthly-estimate">
+          <span>Groft månedsestimat</span>
+          <strong id="monthlyValue">0 kr.</strong>
+          <p>Estimatet er kun vejledende og bruger simple standardrenter, ikke et rigtigt banktilbud.</p>
+        </div>
+      </div>
 
-<div class="chart">
-<div id="rk"></div>
-<div id="bl"></div>
-<div id="ud"></div>
-</div>
-</div>
+      <aside class="chart-panel" aria-label="Fordeling af boligfinansiering">
+        <div class="stacked-chart" aria-hidden="true">
+          <span class="segment mortgage" style="--size: 80%"></span>
+          <span class="segment bank" style="--size: 15%"></span>
+          <span class="segment down" style="--size: 5%"></span>
+        </div>
+        <div class="legend">
+          <span><i class="dot mortgage"></i> Realkredit 80%</span>
+          <span><i class="dot bank"></i> Banklån 15%</span>
+          <span><i class="dot down"></i> Udbetaling 5%</span>
+        </div>
+      </aside>
+    </section>
+  </main>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
