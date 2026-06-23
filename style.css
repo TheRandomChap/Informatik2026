@@ -109,9 +109,30 @@ a {
 
 .nav-links a:hover,
 .nav-links a:focus-visible {
+.nav-links a:focus-visible,
+.nav-links a.is-active {
   color: var(--ink);
   background: #eaf2ef;
   outline: none;
+}
+
+.nav-links .nav-home {
+  display: inline-flex;
+  width: 46px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px;
+}
+
+.home-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .hero {
@@ -199,6 +220,227 @@ h3 {
   min-height: 48px;
   padding: 13px 18px;
   font-weight: 800;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.btn.primary {
+  color: white;
+  background: var(--teal-dark);
+}
+
+.btn.ghost {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.68);
+  border-color: var(--line);
+}
+
+.quick-calculator,
+.calculator-panel,
+.chart-panel,
+.privacy-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(217, 226, 230, 0.92);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.quick-calculator {
+  width: 100%;
+  justify-self: stretch;
+  padding: clamp(20px, 3vw, 30px);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+}
+
+.panel-header h2 {
+  font-size: 1.6rem;
+}
+
+.range-label {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 18px 0 12px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.range-label strong {
+  color: var(--ink);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  text-align: right;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(170px, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.result-grid.expanded {
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+}
+
+.result-card {
+  display: flex;
+  min-height: 172px;
+  padding: 18px;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  background: #f3f8f6;
+  border: 1px solid #dce8e5;
+  border-radius: 8px;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.result-card label {
+  display: block;
+  min-height: 28px;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.monthly-estimate strong {
+  display: block;
+  color: var(--ink);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.15;
+}
+
+.money-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  color: var(--ink);
+  font: inherit;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-weight: 800;
+  text-align: left;
+  background: white;
+  border: 1px solid #d4dfdc;
+  border-radius: 8px;
+}
+
+.money-input:focus {
+  background: #f2f7f5;
+  border-color: var(--teal);
+  outline: none;
+}
+
+.money-input:disabled {
+  color: #3f464b;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.money-input[readonly] {
+  color: #40505a;
+  background: #f8faf9;
+}
+
+.result-card small {
+  display: block;
+  margin-top: auto;
+  padding-top: 18px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.input-card.is-active {
+  border-color: var(--teal);
+  box-shadow: 0 14px 34px rgba(15, 118, 110, 0.14);
+  transform: translateY(-2px);
+}
+
+.input-card.is-locked {
+  opacity: 0.72;
+}
+
+.calculator-status {
+  min-height: 24px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.calculator-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.calculator-help {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.finance-bars {
+  display: flex;
+  height: 18px;
+  margin-top: 22px;
+  overflow: hidden;
+  background: #edf2f1;
+  border-radius: 8px;
+}
+
+.bar {
+  width: var(--size);
+}
+
+.mortgage {
+  background: var(--teal);
+}
+
+.bank {
+  background: var(--blue);
+}
+
+.down {
+  background: var(--coral);
+}
+
+
+.hero-card p,
+.hero-text,
+.page-hero p,
+.section > div > p {
+  max-width: 620px;
+  color: #40505a;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 13px 22px;
+  font-weight: 700;
   text-decoration: none;
   border: 1px solid transparent;
   border-radius: 8px;

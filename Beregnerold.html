@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huslånsberegner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h1>Huslånsberegner</h1>
+
+<h2>Beregn ud fra huspris</h2>
+<input type="number" id="husPris" placeholder="Huspris">
+<button onclick="beregnHuspris()">Beregn</button>
+<div id="resultat1"></div>
+
+<h2>Beregn samlet lån</h2>
+<input type="number" id="husPris2" placeholder="Huspris">
+<input type="number" id="udbetaling2" placeholder="Udbetaling">
+<button onclick="beregnLaan()">Beregn</button>
+<div id="resultat2"></div>
+
+<h2>Hvor dyrt hus har du råd til?</h2>
+<input type="number" id="udbetaling3" placeholder="Udbetaling">
+<button onclick="beregnRaad()">Beregn</button>
+<div id="resultat3"></div>
+
+<hr>
+<h3>Persondata</h3>
+<p>Denne prototype gemmer ingen personlige oplysninger. Alle beregninger udføres lokalt i browseren.</p>
+</div>
+
+<script src="Udregner.js"></script>
+</body>
+</html>
