@@ -26,40 +26,126 @@
 <!-- BEREGNER SECTION -->
 <section id="beregner" class="container">
 <h1>Huslånsberegner</h1>
+<p class="subtitle">Vælg beregningsmodus herunder:</p>
 
-<label>Huspris</label>
-<input type="range" id="slider" min="500000" max="10000000" step="50000" value="2500000">
-<p id="sliderValue">2.500.000 kr</p>
+<!-- Mode Selector -->
+<div class="mode-selector">
+<button class="mode-btn active" onclick="setMode('mode1')">Mode 1: Huspris</button>
+<button class="mode-btn" onclick="setMode('mode2')">Mode 2: Udbetaling</button>
+<button class="mode-btn" onclick="setMode('mode3')">Mode 3: Budget</button>
+</div>
 
-<button onclick="beregn()">Beregn</button>
+<!-- MODE 1: Input house price -->
+<div id="mode1" class="mode-content active">
+<h2>Mode 1: Beregn lån ud fra huspris</h2>
+<p>Angiv den ønskede huspris og få beregnet hvor meget lån du skal optage.</p>
+<label for="slider1">Huspris</label>
+<input type="range" id="slider1" min="500000" max="10000000" step="50000" value="2500000">
+<p id="sliderValue1" class="input-display">2.500.000 kr</p>
+
+<button onclick="calculate1()">Beregn</button>
 
 <div class="card">
-<p id="realkredit"></p>
-<p id="banklaan"></p>
-<p id="udbetaling"></p>
+<p id="realkredit1"></p>
+<p id="banklaan1"></p>
+<p id="udbetaling1"></p>
 </div>
 
 <div class="chart">
-<div id="rk"></div>
-<div id="bl"></div>
-<div id="ud"></div>
+<div id="rk1" style="background:#0f766e;"></div>
+<div id="bl1" style="background:#3b82f6;"></div>
+<div id="ud1" style="background:#f97316;"></div>
 </div>
+</div>
+
+<!-- MODE 2: Input down payment and house price -->
+<div id="mode2" class="mode-content">
+<h2>Mode 2: Beregn lån fra udbetaling og pris</h2>
+<p>Angiv hvor meget du har til udbetaling og huspris, så beregnes hvor meget du skal låne.</p>
+
+<label for="price2">Huspris</label>
+<input type="number" id="price2" min="500000" max="10000000" step="50000" value="2500000" placeholder="Huspris">
+<p id="priceDisplay2" class="input-display">2.500.000 kr</p>
+
+<label for="downpay2">Udbetaling (kr)</label>
+<input type="number" id="downpay2" min="25000" max="1000000" step="25000" value="125000" placeholder="Udbetaling">
+<p id="downpayDisplay2" class="input-display">125.000 kr (5%)</p>
+
+<button onclick="calculate2()">Beregn</button>
+
+<div class="card">
+<p id="realkredit2"></p>
+<p id="banklaan2"></p>
+<p id="totalLoan2"></p>
+</div>
+
+<div class="chart">
+<div id="rk2" style="background:#0f766e;"></div>
+<div id="bl2" style="background:#3b82f6;"></div>
+<div id="ud2" style="background:#f97316;"></div>
+</div>
+</div>
+
+<!-- MODE 3: Budget calculator -->
+<div id="mode3" class="mode-content">
+<h2>Mode 3: Hvor dyrt et hus kan jeg købe?</h2>
+<p>Angiv hvor meget du har til udbetaling, og få at vide hvor dyrt et hus du har råd til.</p>
+
+<label for="downpay3">Udbetaling (kr)</label>
+<input type="number" id="downpay3" min="50000" max="5000000" step="50000" value="250000" placeholder="Udbetaling">
+<p id="downpayDisplay3" class="input-display">250.000 kr</p>
+
+<button onclick="calculate3()">Beregn</button>
+
+<div class="card">
+<p id="maxPrice3"></p>
+<p id="realkredit3"></p>
+<p id="banklaan3"></p>
+</div>
+
+<div class="chart">
+<div id="rk3" style="background:#0f766e;"></div>
+<div id="bl3" style="background:#3b82f6;"></div>
+<div id="ud3" style="background:#f97316;"></div>
+</div>
+</div>
+
 </section>
 
 <!-- GDPR SECTION -->
 <section id="gdpr" class="container">
 <h1>Persondata og GDPR</h1>
 
-<p>Denne hjemmeside gemmer ingen personoplysninger. Da alle udreninger bliver foretaget i browser lokalt.</p>
+<h2>Behandling af persondata</h2>
+<p><strong>Denne hjemmeside gemmer ingen personoplysninger.</strong> Alle beregninger udføres lokalt i din browser uden at lagre eller sende data til serverne.</p>
 
-<h2>Dine rettigheder</h2>
+<h2>Hvordan funktionerer det?</h2>
 <ul>
-<li>Ret til indsigt</li>
-<li>Ret til berigtigelse</li>
-<li>Ret til sletning</li>
-<li>Ret til dataportabilitet</li>
-<li>Ret til at klage til Datatilsynet</li>
+<li><strong>Lokal beregning:</strong> JavaScript-koden kører i din browser på din egen computer</li>
+<li><strong>Ingen datalagring:</strong> Dine tal sendes aldrig til vores servere</li>
+<li><strong>Ingen tracking:</strong> Vi bruger ikke cookies til at spore dine handlinger</li>
+<li><strong>Browserens hukommelse:</strong> Hvis du lukker siden, slettes alle data automatisk</li>
 </ul>
+
+<h2>Dine rettigheder efter GDPR</h2>
+<p>Selvom vi ikke opsamler dine personoplysninger, har du stadig disse rettigheder:</p>
+<ul>
+<li><strong>Ret til indsigt:</strong> Du kan anmode om at se alle data vi eventuelt opsamler (der er ingen)</li>
+<li><strong>Ret til berigtigelse:</strong> Du kan få forkerte data rettet</li>
+<li><strong>Ret til sletning (retten til at blive glemt):</strong> Du kan anmode om at blive slettet</li>
+<li><strong>Ret til dataportabilitet:</strong> Du kan få dine data i maskinlæsbart format</li>
+<li><strong>Ret til at modsætte dig behandling:</strong> Du kan modsætte dig personalisering</li>
+<li><strong>Ret til at klage til Datatilsynet:</strong> Du kan indgive klage til tilsynsmyndigheder</li>
+</ul>
+
+<h2>Cookies</h2>
+<p>Vi bruger <strong>ikke</strong> cookies til at opsamle dine data. Hvis dit browser-setup benytter session-cookies, er disse kun til intern navigation og indeholder ingen personlige oplysninger.</p>
+
+<h2>Kontakt os</h2>
+<p>Hvis du har spørgsmål om vores datapolitik, kan du kontakte os gennem denne hjemmeside.</p>
+
+<h2>Databehandler</h2>
+<p>HusFinans - et projekt udviklet af elever på Slotshaven Gymnasium</p>
 </section>
 
 <!-- Footer (shared, sticky on mobile) -->
