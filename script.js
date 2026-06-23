@@ -54,6 +54,14 @@ function setFieldValue(field, value) {
   }
 }
 
+function setAutoValue(field, value, editedInput) {
+  if (!field || field === editedInput) {
+    return;
+  }
+
+  field.value = formatMoney(value);
+}
+
 function resetCalculator(calculator) {
   calculator.querySelectorAll("[data-finance-input], [data-finance-output]").forEach((field) => {
     field.value = "";
@@ -72,6 +80,7 @@ function calculateFromKnownValues(calculator, editedInput) {
   const bankOutput = calculator.querySelector('[data-finance-output="bank"]');
 
   const editedValue = parseMoney(editedInput.value);
+  const isEditingEmptyField = editedInput.value.trim() === "";
   editedInput.dataset.manual = editedValue > 0 ? "true" : "false";
 
   const hasManualPrice = priceInput.dataset.manual === "true";
@@ -122,8 +131,10 @@ function calculateFromKnownValues(calculator, editedInput) {
     statusText = "Beregner mulig ejendomspris ud fra udbetaling.";
   }
 
-  setFieldValue(priceInput, price);
-  setFieldValue(savingsInput, savings);
+  // Det felt brugeren aktivt skriver i, bliver ikke auto-udfyldt her.
+  // Det gør, at man kan slette hele feltet og skrive en ny værdi uden at tallet hopper tilbage.
+  setAutoValue(priceInput, price, editedInput);
+  setAutoValue(savingsInput, savings, editedInput);
   setFieldValue(mortgageOutput, mortgage);
   setFieldValue(bankOutput, bank);
 
@@ -135,6 +146,10 @@ function calculateFromKnownValues(calculator, editedInput) {
 
   setStatus(calculator, statusText);
   updateMonthlyEstimate(price, mortgage, bank);
+
+  if (isEditingEmptyField) {
+    editedInput.value = "";
+  }
 }
 
 document.querySelectorAll("[data-calculator]").forEach((calculator) => {
