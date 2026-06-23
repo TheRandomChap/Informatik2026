@@ -27,3 +27,16 @@ document.getElementById('ud').style.height='5%';
 
 if(slider){beregn();}
 
+// Smooth scroll for nav links with offset
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target) {
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY -60;
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    }
+  });
+});
+
+
