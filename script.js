@@ -26,3 +26,4 @@ document.getElementById('ud').style.height='5%';
 }
 
 if(slider){beregn();}
+
