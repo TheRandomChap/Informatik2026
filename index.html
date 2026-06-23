@@ -40,39 +40,49 @@
     <section class="section home-calculator-section" id="beregn">
       <div>
         <p class="eyebrow">Live beregner</p>
-        <h2>Prøv med din egen boligpris.</h2>
-        <p>Flyt slideren og se fordelingen med det samme. Beregningen bruger den simple 80 / 15 / 5-model.</p>
+        <h2>Prøv med de tal du allerede kender.</h2>
+        <p>Skriv ejendomspris, udbetaling eller begge dele. Realkredit og banklån bliver beregnet automatisk.</p>
       </div>
 
       <section class="quick-calculator" aria-labelledby="quick-title">
         <div class="panel-header">
           <p class="eyebrow">Live beregner</p>
-          <h2 id="quick-title">Boligpris</h2>
+          <h2 id="quick-title">Boligfinansiering</h2>
         </div>
 
-        <label class="range-label" for="priceSlider">
-          <span>Vælg pris</span>
-          <strong id="priceValue">2.500.000 kr.</strong>
-        </label>
-        <input type="range" id="priceSlider" min="500000" max="10000000" step="50000" value="2500000">
+        <form class="calculator-form" data-calculator>
+          <p class="calculator-status" data-calculator-status>Skriv ejendomspris, udbetaling eller begge dele.</p>
 
-        <div class="result-grid" aria-live="polite">
-          <article class="result-card">
-            <span>Realkredit</span>
-            <strong id="mortgageValue">2.000.000 kr.</strong>
-            <small>80% af prisen</small>
-          </article>
-          <article class="result-card">
-            <span>Banklån</span>
-            <strong id="bankLoanValue">375.000 kr.</strong>
-            <small>15% af prisen</small>
-          </article>
-          <article class="result-card accent">
-            <span>Udbetaling</span>
-            <strong id="downPaymentValue">125.000 kr.</strong>
-            <small>5% du selv skal have</small>
-          </article>
-        </div>
+          <!-- Brugeren skriver kun ejendomspris og/eller udbetaling. Realkredit og banklån er beregnede felter. -->
+          <div class="result-grid calculator-fields" aria-live="polite">
+            <article class="result-card input-card">
+              <label for="propertyInput">Ejendomspris</label>
+              <input id="propertyInput" class="money-input" type="text" inputmode="numeric" placeholder="Skriv pris" data-finance-input="price">
+              <small>den samlede pris på boligen</small>
+            </article>
+            <article class="result-card output-card">
+              <label for="bankInput">Banklån</label>
+              <input id="bankInput" class="money-input" type="text" placeholder="Beregnes" data-finance-output="bank" readonly>
+              <small>boligpris minus realkredit og udbetaling</small>
+            </article>
+            <article class="result-card output-card">
+              <label for="mortgageInput">Realkredit</label>
+              <input id="mortgageInput" class="money-input" type="text" placeholder="Beregnes" data-finance-output="mortgage" readonly>
+              <small>op til 80% af ejendomsprisen</small>
+            </article>
+            <article class="result-card input-card">
+              <label for="savingsInput">Udbetaling</label>
+              <input id="savingsInput" class="money-input" type="text" inputmode="numeric" placeholder="Skriv udbetaling" data-finance-input="savings">
+              <small>mængden af penge der kommer fra dine egne lommer</small>
+            </article>
+          </div>
+
+          <div class="calculator-actions">
+            <button class="btn primary" type="button" data-calculator-reset>Nulstil felter</button>
+          </div>
+
+          <p class="calculator-help">Tre muligheder: skriv kun ejendomspris, skriv kun udbetaling, eller skriv begge dele for at se det tilpassede banklån.</p>
+        </form>
 
         <div class="finance-bars" aria-hidden="true">
           <span class="bar mortgage" style="--size: 80%"></span>
