@@ -1,0 +1,181 @@
+Forklaring af matematikken i script.js
+
+1. Finansieringsmodellen
+
+Programmet starter med dette objekt:
+
+const financeShares = {
+  mortgage: 0.8,
+  bank: 0.15,
+  savings: 0.05
+};
+
+Objektet fungerer som en datastruktur, der gemmer faste konstanter for boligfinansieringen.
+
+Tallene betyder:
+
+- mortgage: 0.8 betyder, at realkreditlanet er 80% af boligprisen.
+- bank: 0.15 betyder, at banklanet er 15% af boligprisen.
+- savings: 0.05 betyder, at udbetalingen er 5% af boligprisen.
+
+Matematisk svarer det til:
+
+realkredit = pris * 0,8
+banklan = pris * 0,15
+udbetaling = pris * 0,05
+
+I informatik-termer er det en hardcoded matematisk model, hvor procenttal gemmes som decimaltal.
+
+
+2. Parsing af brugerinput
+
+Funktionen parseMoney bruges til at lave brugerens tekstinput om til et tal:
+
+function parseMoney(value) {
+  return Number(String(value).replace(/[^\d]/g, ""));
+}
+
+Hvis brugeren skriver:
+
+1.500.000 kr.
+
+fjerner programmet alt, der ikke er cifre. Resultatet bliver:
+
+1500000
+
+Derefter laver Number(...) teksten om til datatypen number.
+
+Informatik-fagtermer:
+
+- inputbehandling
+- typekonvertering
+- regulaert udtryk
+- datarensning
+- string til number
+
+
+3. Afrunding og formattering
+
+Funktionen formatMoney bruges til at vise tal som penge:
+
+return currency.format(Math.round(value));
+
+Math.round(value) afrunder tallet til naermeste hele tal.
+
+Eksempel:
+
+1234.56 bliver til 1235
+
+Derefter bruger programmet Intl.NumberFormat("da-DK"), sa tallet vises med dansk talformat.
+
+Eksempel:
+
+1500000 bliver vist som 1.500.000
+
+
+4. Nar bade ejendomspris og udbetaling kendes
+
+Hvis brugeren skriver bade pris og udbetaling, beregner programmet realkreditlan og banklan sadan:
+
+mortgage = Math.min(price * financeShares.mortgage, Math.max(price - savings, 0));
+bank = Math.max(price - mortgage - savings, 0);
+
+Forst beregnes realkreditlanet som 80% af prisen:
+
+price * 0,8
+
+Men realkreditlanet ma ikke blive storre end det belob, der mangler efter udbetalingen:
+
+price - savings
+
+Derfor bruges Math.min(...), som vaelger det mindste af to tal.
+
+Math.max(price - savings, 0) sikrer, at tallet aldrig bliver negativt.
+
+Banklanet beregnes bagefter:
+
+banklan = pris - realkredit - udbetaling
+
+Igen bruges Math.max(..., 0), sa banklanet aldrig kan blive mindre end 0.
+
+
+5. Nar kun ejendomspris kendes
+
+Hvis brugeren kun skriver ejendomsprisen, bruger programmet standardfordelingen:
+
+price = manualPrice;
+mortgage = price * financeShares.mortgage;
+bank = price * financeShares.bank;
+savings = price * financeShares.savings;
+
+Det svarer til:
+
+realkredit = pris * 0,8
+banklan = pris * 0,15
+udbetaling = pris * 0,05
+
+Eksempel med en boligpris pa 2.000.000 kr.:
+
+realkredit = 2.000.000 * 0,8 = 1.600.000
+banklan = 2.000.000 * 0,15 = 300.000
+udbetaling = 2.000.000 * 0,05 = 100.000
+
+
+6. Nar kun udbetaling kendes
+
+Hvis brugeren kun skriver udbetalingen, finder programmet den mulige ejendomspris ved at dividere med 0,05:
+
+price = savings / financeShares.savings;
+
+Det skyldes, at udbetalingen er 5% af prisen.
+
+Eksempel:
+
+pris = udbetaling / 0,05
+pris = 100.000 / 0,05
+pris = 2.000.000
+
+Derefter beregnes realkreditlan og banklan igen:
+
+mortgage = price * 0,8
+bank = price * 0,15
+
+Det er en omvendt beregning, hvor programmet finder totalvaerdien ud fra en procentdel.
+
+
+7. Betingelser og statusbeskeder
+
+Programmet bruger if-statements til at vurdere resultatet:
+
+if (savings < price * financeShares.savings)
+
+Her undersoger programmet, om udbetalingen er mindre end 5% af boligprisen.
+
+Matematisk:
+
+udbetaling < pris * 0,05
+
+Hvis det er sandt, viser programmet en besked om, at banklanet bliver storre end standardmodellen.
+
+Senere bruges:
+
+else if (savings > price * 0.2)
+
+Her undersoger programmet, om udbetalingen er over 20% af boligprisen.
+
+Hvis udbetalingen er over 20%, bliver banklanet 0 kr. i modellen, fordi realkredit og udbetaling kan daekke hele prisen.
+
+
+Kort opsummering
+
+Matematikken i script.js bruger:
+
+- procentregning
+- decimaler som procenttal
+- afrunding
+- maksimum- og minimumsgraenser
+- betingede beregninger
+- omvendt procentregning
+- typekonvertering fra tekst til tal
+
+Programmet fungerer derfor som en simpel algoritme, der ud fra brugerinput beregner en boligfinansieringsmodel med realkreditlan, banklan og udbetaling.
