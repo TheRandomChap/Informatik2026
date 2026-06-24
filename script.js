@@ -1,3 +1,4 @@
+// Procentfordelingen gemmes som decimaler, så programmet kan bruge dem direkte i beregninger.
 const financeShares = {
   mortgage: 0.8,
   bank: 0.15,
@@ -9,6 +10,7 @@ const currency = new Intl.NumberFormat("da-DK", {
 });
 
 function parseMoney(value) {
+  // Datarensning: fjerner alt andet end cifre, så tekstinput kan konverteres til et tal.
   return Number(String(value).replace(/[^\d]/g, ""));
 }
 
@@ -17,6 +19,7 @@ function formatMoney(value) {
     return "";
   }
 
+  // Afrunder til hele kroner og formatterer tallet med dansk talformat.
   return currency.format(Math.round(value));
 }
 
@@ -102,6 +105,8 @@ function calculateFromKnownValues(calculator, editedInput) {
   if (hasManualPrice && hasManualSavings) {
     // Case 1: Brugeren kender både ejendomspris og udbetaling.
     // Realkredit må højst være 80% af prisen, og banklånet bliver resten.
+    // Math.min sikrer, at realkreditlånet ikke overstiger modelgrænsen på 80%.
+    // Math.max sikrer, at programmet ikke viser negative lån.
     price = manualPrice;
     savings = manualSavings;
     mortgage = Math.min(price * financeShares.mortgage, Math.max(price - savings, 0));
@@ -116,6 +121,7 @@ function calculateFromKnownValues(calculator, editedInput) {
   } else if (hasManualPrice) {
     // Case 2: Brugeren kender kun ejendomsprisen.
     // Siden bruger standardfordelingen 80% / 15% / 5%.
+    // Hver del findes ved at gange boligprisen med den relevante procentandel.
     price = manualPrice;
     mortgage = price * financeShares.mortgage;
     bank = price * financeShares.bank;
@@ -124,6 +130,7 @@ function calculateFromKnownValues(calculator, editedInput) {
   } else {
     // Case 3: Brugeren kender kun udbetalingen.
     // Udbetalingen er 5%, så den mulige ejendomspris findes ved at dividere med 0,05.
+    // Det er omvendt procentregning: totalværdi = delværdi / procentandel.
     savings = manualSavings;
     price = savings / financeShares.savings;
     mortgage = price * financeShares.mortgage;
