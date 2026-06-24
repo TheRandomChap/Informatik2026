@@ -227,11 +227,29 @@ h3 {
   text-decoration: none;
   border: 1px solid transparent;
   border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
 .btn.primary {
   color: white;
   background: var(--teal-dark);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  box-shadow: 0 12px 28px rgba(20, 33, 43, 0.22);
+  transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.28);
+  outline-offset: 3px;
+}
+
+.btn.primary.red_btn:hover,
+.btn.primary.red_btn:focus-visible {
+  background-color: #C94A3A;
 }
 
 .btn.ghost {
